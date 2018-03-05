@@ -1,0 +1,21 @@
+{
+  "name": "webtask-image-filters",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webtask",
+    "node",
+    "image"
+  ],
+  "author": "Gabriel Peña",
+  "license": "ISC",
+  "dependencies": {
+    "get-pixels": "^3.3.0",
+    "image-type": "^3.0.0",
+    "save-pixels": "^2.3.4"
+  }
+}
