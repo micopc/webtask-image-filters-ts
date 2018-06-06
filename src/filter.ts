@@ -1,8 +1,3 @@
-// const fs = require('fs')
-// const getPixels = require('get-pixels')
-// const savePixels = require('save-pixels')
-// const getImageType = require('image-type')
-
 import * as fs from 'fs'
 import getPixels = require('get-pixels')
 import savePixels = require('save-pixels')

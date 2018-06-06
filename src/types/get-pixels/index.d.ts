@@ -3,8 +3,12 @@ declare module 'get-pixels' {
 
   function getPixels(
     url: Buffer | string,
+    cb: (err: Error | null, pixels: ndarray) => void
+  ): void
+  function getPixels(
+    url: Buffer | string,
     type: string,
-    cb: (err: Error, pixels: ndarray) => void
+    cb: (err: Error | null, pixels: ndarray) => void
   ): void
 
   export = getPixels
