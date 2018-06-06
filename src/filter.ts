@@ -1,12 +1,18 @@
-'use latest'
+// const fs = require('fs')
+// const getPixels = require('get-pixels')
+// const savePixels = require('save-pixels')
+// const getImageType = require('image-type')
 
-const fs = require('fs')
-const getPixels = require('get-pixels')
-const savePixels = require('save-pixels')
-const getImageType = require('image-type')
+import * as fs from 'fs'
+import getPixels = require('get-pixels')
+import savePixels = require('save-pixels')
+import getImageType = require('image-type')
+
+import * as ndarray from 'ndarray'
+import * as http from 'http'
 
 // protect against invalid colors
-function truncateColor(color) {
+function truncateColor(color: number): number {
   if (color < 0) return 0
   if (color > 255) return 255
   return color
@@ -16,7 +22,10 @@ function truncateColor(color) {
  * Apply the specified filter to a Pixels object
  * a Pixels object has a data key which stores all the image pixels and their respective colors
  * */
-function applyFilter(pixels, filterType) {
+function applyFilter(
+  pixels: ndarray,
+  filterType: string
+): ndarray.Data<number> {
   const data = pixels.data
 
   /**
@@ -66,12 +75,16 @@ function applyFilter(pixels, filterType) {
   return data
 }
 
-module.exports = function(context, req, res) {
+module.exports = function(
+  context: object,
+  req: http.ServerRequest,
+  res: http.ServerResponse
+): void {
   const filterType = req.url.split('/').pop()
 
-  let image = []
+  let image: Buffer[] = []
 
-  req.on('data', data => image.push(data))
+  req.on('data', (data: Buffer) => image.push(data))
 
   req.on('end', () => {
     const imageBuffer = Buffer.concat(image)
@@ -82,7 +95,6 @@ module.exports = function(context, req, res) {
       (imageType.ext !== 'jpg' && imageType.ext !== 'png')
     ) {
       throw new Error('The image needs to be either jpg or png')
-      return
     }
 
     getPixels(imageBuffer, imageType.mime, (err, pixels) => {

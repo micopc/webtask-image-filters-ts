@@ -1,10 +1,13 @@
 {
-  "name": "webtask-image-filters",
+  "name": "webtask-image-filters-ts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch",
+    "build": "tsc",
+    "deploy": "cp-cli package.json ./dist/package.json && wt create ./dist/filter.js"
   },
   "keywords": [
     "webtask",
@@ -17,5 +20,11 @@
     "get-pixels": "^3.3.0",
     "image-type": "^3.0.0",
     "save-pixels": "^2.3.4"
+  },
+  "devDependencies": {
+    "@types/file-type": "^5.2.1",
+    "@types/ndarray": "^1.0.6",
+    "@types/node": "^10.3.1",
+    "cp-cli": "^1.1.2"
   }
 }
